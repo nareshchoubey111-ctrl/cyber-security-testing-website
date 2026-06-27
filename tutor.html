@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Sync // Cyber Security Hub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="sidebar">
+        <h2>Nexus Project</h2>
+        <a href="index.html" class="nav-link">📡 Terminal HQ</a>
+        <a href="tutorials.html" class="nav-link">📚 Intel Modules</a>
+        <a href="tutor.html" class="nav-link active">🤖 AI Sync</a>
+        <a href="labs.html" class="nav-link">🔒 Auth Lab</a>
+    </div>
+
+    <div class="container">
+        <h1>AI Coding Intelligence</h1>
+        <p class="subtitle">A secure interface for debugging code and learning programming algorithms.</p>
+
+        <div class="card">
+            <h3>1. Session Authorization</h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 15px;">Input your OpenRouter key to chat. The token is handled inside your browser session and never transmitted to external third-party logging structures.</p>
+            <input type="password" id="token" placeholder="Authorization Token (sk-or-v1-...)">
+        </div>
+
+        <div class="card">
+            <h3>2. Developer Chat Matrix</h3>
+            <div class="chat-box" id="terminal">
+                <div class="msg ai">Core sync complete. State your programming query to begin code optimization.</div>
+            </div>
+            
+            <div style="display: flex; gap: 15px; margin-top: 15px;">
+                <input type="text" id="query" placeholder="Ask a software or defensive programming engineering question...">
+                <button class="btn" onclick="executeSync()">Transmit</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function executeSync() {
+            const token = document.getElementById('token').value;
+            const queryBox = document.getElementById('query');
+            const terminal = document.getElementById('terminal');
+            const userPrompt = queryBox.value;
+
+            if(!userPrompt) return;
+            if(!token) { alert('Authorization Token Required.'); return; }
+
+            terminal.innerHTML += `<div class="msg user">${userPrompt}</div>`;
+            queryBox.value = '';
+            terminal.scrollTop = terminal.scrollHeight;
+
+            try {
+                const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+                    method: "POST",
+                    headers: {
+                        "Authorization": `Bearer ${token}`,
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        "model": "google/gemini-2.5-flash",
+                        "messages": [
+                            {"role": "system", "content": "You are a software development assistant. Provide clean, well-commented code blocks and step-by-step programming advice."},
+                            {"role": "user", "content": userPrompt}
+                        ]
+                    })
+                });
+
+                const data = await response.json();
+                if(data.error) {
+                    terminal.innerHTML += `<div class="msg ai" style="color:var(--error)">Error: ${data.error.message}</div>`;
+                } else {
+                    const rawOutput = data.choices[0].message.content;
+                    terminal.innerHTML += `<div class="msg ai">${rawOutput.replace(/\n/g, '<br>')}</div>`;
+                }
+            } catch {
+                terminal.innerHTML += `<div class="msg ai" style="color:var(--error)">Network drop detected. Check token structural format.</div>`;
+            }
+            terminal.scrollTop = terminal.scrollHeight;
+        }
+    </script>
+</body>
+</html>
