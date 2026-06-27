@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Intel Modules // Cyber Security Hub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="sidebar">
+        <h2>Nexus Project</h2>
+        <a href="index.html" class="nav-link">📡 Terminal HQ</a>
+        <a href="tutorials.html" class="nav-link active">📚 Intel Modules</a>
+        <a href="tutor.html" class="nav-link">🤖 AI Sync</a>
+        <a href="labs.html" class="nav-link">🔒 Auth Lab</a>
+    </div>
+
+    <div class="container">
+        <h1>Defensive Intelligence Modules</h1>
+        <p class="subtitle">Deep-dive breakdowns of common web infrastructure weaknesses and remediation.</p>
+
+        <div class="card">
+            <h3 style="color: var(--accent-glow);">Module 01 // SQL Injection Mechanics</h3>
+            <p><strong>The Flaw:</strong> Occurs when backend applications take direct, unsanitized user input and concatenate it string-by-string directly into database command lines.</p>
+            <p><strong>The Threat:</strong> Threat actors manipulate the database logic to read hidden records, modify operational entries, or drop tables completely.</p>
+            <p><strong>The Fix:</strong> Implement <em>Parameterized Queries</em> (Prepared Statements). This ensures the SQL engine treats incoming data strictly as a literal value, never as executable code.</p>
+        </div>
+
+        <div class="card">
+            <h3 style="color: var(--accent-glow);">Module 02 // Automated Brute-Force Defense</h3>
+            <p><strong>The Flaw:</strong> Login systems that do not challenge repeated login failures allow tools to rapidly cycle millions of common variations a minute.</p>
+            <p><strong>The Threat:</strong> Automated credential stuffing attacks eventually map out weak user credentials or predictable operational system defaults.</p>
+            <p><strong>The Fix:</strong> Bind aggressive exponential rate-limiting or captchas to endpoints tracking concurrent connection signatures, blocking offending IPs natively.</p>
+        </div>
+    </div>
+
+</body>
+</html>
