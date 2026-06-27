@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Auth Lab // Cyber Security Hub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="sidebar">
+        <h2>Nexus Project</h2>
+        <a href="index.html" class="nav-link">📡 Terminal HQ</a>
+        <a href="tutorials.html" class="nav-link">📚 Intel Modules</a>
+        <a href="tutor.html" class="nav-link">🤖 AI Sync</a>
+        <a href="labs.html" class="nav-link active">🔒 Auth Lab</a>
+    </div>
+
+    <div class="container">
+        <h1>Authentication Lab Console</h1>
+        <p class="subtitle">A static sandbox simulating access-control forms and invalid request rejections.</p>
+
+        <div class="card" id="formWrapper" style="max-width: 450px;">
+            <h3>System Entry Node</h3>
+            <p style="font-size:0.85rem; color: var(--text-muted); margin-bottom: 20px;">Notice how brute-force scanners receive distinct error triggers upon failing database logic checks.</p>
+            
+            <div id="alertBox" style="color: var(--error); margin-bottom: 15px; display: none; font-weight: 600; font-size: 0.9rem;">🛑 ACCESS DENIED: INVALID ACCOUNT SIGNATURE</div>
+            
+            <label style="font-size:0.8rem; text-transform:uppercase; color: var(--text-muted);">Operator Alias</label>
+            <input type="text" id="user" placeholder="root / admin" style="margin-bottom: 15px; margin-top: 5px;">
+            
+            <label style="font-size:0.8rem; text-transform:uppercase; color: var(--text-muted);">Security Passphrase</label>
+            <input type="password" id="pass" placeholder="••••••••" style="margin-bottom: 20px; margin-top: 5px;">
+            
+            <button class="btn" onclick="verifyNode()">Initialize Login</button>
+        </div>
+
+        <div class="card" id="successWrapper" style="display: none; border-color: var(--success); max-width: 500px;">
+            <h3 style="color: var(--success)">✓ Security Clearance Granted</h3>
+            <p>Session ID successfully generated. In production networks, an authentication server issues an encrypted cookie or JSON Web Token (JWT) at this stage to validate any future tracking steps.</p>
+            <button class="btn" onclick="resetNode()" style="background: #22314d;">Purge Session Data</button>
+        </div>
+    </div>
+
+    <script>
+        function verifyNode() {
+            const u = document.getElementById('user').value;
+            const p = document.getElementById('pass').value;
+            const alertBox = document.getElementById('alertBox');
+
+            // Hardcoded testing credentials for simulation layout
+            if(u === 'operator' && p === 'n3xus_p4ss!') {
+                alertBox.style.display = 'none';
+                document.getElementById('formWrapper').style.display = 'none';
+                document.getElementById('successWrapper').style.display = 'block';
+            } else {
+                alertBox.style.display = 'block';
+            }
+        }
+
+        function resetNode() {
+            document.getElementById('successWrapper').style.display = 'none';
+            document.getElementById('formWrapper').style.display = 'block';
+            document.getElementById('user').value = '';
+            document.getElementById('pass').value = '';
+        }
+    </script>
+</body>
+</html>
